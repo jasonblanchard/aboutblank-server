@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150105232330) do
+ActiveRecord::Schema.define(version: 20150105234456) do
 
   create_table "goodreads_events", force: :cascade do |t|
     t.string   "uuid"
@@ -22,5 +22,7 @@ ActiveRecord::Schema.define(version: 20150105232330) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
+
+  add_index "goodreads_events", ["uuid"], name: "index_goodreads_events_on_uuid"
 
 end

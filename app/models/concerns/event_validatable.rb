@@ -4,5 +4,9 @@ module EventValidatable
   included do
     validates_presence_of :uuid
     validates_uniqueness_of :uuid
+    validates_presence_of :title
+    validates_presence_of :happened_at
+    validates_presence_of :url
+
   end
 end

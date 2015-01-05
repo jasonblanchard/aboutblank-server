@@ -16,18 +16,11 @@ RSpec.shared_examples "an event" do |klass|
   end
 
   describe "validations" do
-    it "validates presence of :uuid" do
-      event = klass.new
-      event.save
-      expect(event.valid?).to eq false
-    end
-
-    it "validates uniqueness of :uuid" do
-      event1 = klass.create(:uuid => '1234')
-      event2 = klass.new(:uuid => '1234')
-
-      expect(event2.valid?).to eq false
-    end
+    it { should validate_presence_of(:uuid) }
+    it { should validate_uniqueness_of(:uuid) }
+    it { should validate_presence_of(:title) }
+    it { should validate_presence_of(:happened_at) }
+    it { should validate_presence_of(:url) }
   end
 
 end
