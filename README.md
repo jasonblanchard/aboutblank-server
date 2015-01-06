@@ -10,13 +10,13 @@ TODOs and stuff
 
 =======
 
-[book icon] [cover image] Started reading "blah dee blah" (link to book on goodreads)
+(book icon) (cover image) Started reading "blah dee blah" (link to book on goodreads)
 
-[delicious icon] bookmarked "some cools site" (link to url)
+(delicious icon) bookmarked "some cools site" (link to url)
 
-[github icon] created a new project: "some cool project" (link to repo)
+(github icon) created a new project: "some cool project" (link to repo)
 
-[github icon] starred a project "some cool other project" (link to repo)
+(github icon) starred a project "some cool other project" (link to repo)
 
 GoodreadsEvent
 --------------
@@ -31,6 +31,6 @@ image_url (special)
 
 GoodreadsFetcher
 -------------
-#fetch_and_save
-#fetch
-#save
+fetch_and_save
+fetch
+save
