@@ -8,5 +8,7 @@ module EventValidatable
     validates_presence_of :happened_at
     validates_presence_of :url
 
+    scope :recent, lambda { order("created_at DESC") }
   end
+
 end
