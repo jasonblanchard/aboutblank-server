@@ -20,17 +20,17 @@ TODOs and stuff
 
 GoodreadsEvent
 --------------
-id
-created_at
-updated_at
-uuid
-happened_at
-url
-title
-image_url (special)
+* id
+* created_at
+* updated_at
+* uuid
+* happened_at
+* url
+* title
+* image_url (special)
 
 GoodreadsFetcher
 -------------
-fetch_and_save
-fetch
-save
+* fetch_and_save
+* fetch
+* save
