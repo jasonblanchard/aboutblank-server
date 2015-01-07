@@ -24,5 +24,14 @@ module AboutblankServer
     config.active_record.raise_in_transactional_callbacks = true
 
     config.autoload_paths += %W(#{config.root}/app)
+
+    config.middleware.insert_before 0, "Rack::Cors", :debug => true, :logger => (-> { Rails.logger }) do
+      allow do
+        resource '*',
+          :headers => :any,
+          :methods => [:get, :options],
+          :max_age => 0
+      end
+    end
   end
 end

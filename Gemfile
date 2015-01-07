@@ -51,3 +51,4 @@ gem "active_model_serializers", "~> 0.9.0"
 
 gem "goodreads"
 gem "figaro"
+gem 'rack-cors', '0.3.0'
