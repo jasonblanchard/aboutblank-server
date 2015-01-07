@@ -1,9 +1,17 @@
-module Fetcher
+module Fetchers
   class BaseFetcher
 
     def initialize
-      # Override in subclass with an API client
-      @client = Object.new
+      setup_client
+      setup_parser
+    end
+
+    def setup_parser(parser=nil)
+      raise NotImplemented
+    end
+
+    def setup_client(client=nil)
+      raise NotImplemented
     end
 
     def fetch_and_save!
