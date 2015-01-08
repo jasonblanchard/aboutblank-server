@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150107123733) do
+ActiveRecord::Schema.define(version: 20150108125053) do
 
   create_table "delicious_events", force: :cascade do |t|
     t.string   "title"
@@ -20,7 +20,10 @@ ActiveRecord::Schema.define(version: 20150107123733) do
     t.string   "url"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.string   "image_url"
   end
+
+  add_index "delicious_events", ["uuid"], name: "index_delicious_events_on_uuid"
 
   create_table "goodreads_events", force: :cascade do |t|
     t.string   "uuid"

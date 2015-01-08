@@ -8,7 +8,7 @@ RSpec.shared_examples "an event" do |klass|
 
   it "has all the fields" do
     event = klass.new
-    fields = [:uuid, :happened_at, :url, :title]
+    fields = [:uuid, :happened_at, :url, :title, :image_url]
 
     fields.each do |field|
       expect{event.send(field)}.not_to raise_error
