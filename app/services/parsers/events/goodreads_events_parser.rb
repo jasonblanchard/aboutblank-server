@@ -1,14 +1,6 @@
-# TODO make parent class
-# TODO Write tests
 module Parsers
   module Events
-    class GoodreadsEventsParser
-
-      attr_reader :uuid, :title, :happened_at, :url, :image_url
-
-      def initialize(data)
-        @data = data
-      end
+    class GoodreadsEventsParser < Parsers::BaseParser
 
       def fields
         @uuid = @data[:id]
