@@ -3,11 +3,12 @@ require 'rails_helper'
 RSpec.describe Fetchers::EventsFetcher do
   
   let(:client) { double('client') }
+  let(:client) { Clients::Events::GoodreadsEventsClient }
   let(:parser) { Parsers::Events::GoodreadsEventsParser }
   let(:fetcher) { Fetchers::EventsFetcher.new(client, parser, GoodreadsEvent) }
 
   before do
-    allow(client).to receive(:events).and_return([
+    allow_any_instance_of(parser).to receive(:normalized_events).and_return([
       instance_double("BaseParser::NormalizedEvent", :uuid => '1234', :title => 'testing', :happened_at => Time.now.to_date, :url => "http://example.com", :image_url => "http://example.com/image"),
       instance_double("BaseParser::NormalizedEvent", :uuid => '4567', :title => 'testing2', :happened_at => Time.now.to_date, :url => "http://example.com/2", :image_url => "http://example.com/image/2"),
     ])
@@ -16,7 +17,7 @@ RSpec.describe Fetchers::EventsFetcher do
   describe '#save' do
     describe 'when the event does not exist' do
       it 'creates a new event' do
-        data = client.events.first
+        data = parser.new(client.events).normalized_events.first
         
         new_event = fetcher.save(data)
         expect(new_event.title).to eq data.title
@@ -34,7 +35,7 @@ RSpec.describe Fetchers::EventsFetcher do
 
       it 'updates the event' do
         old_title = GoodreadsEvent.where(:uuid => '1234').first.title
-        data = client.events.first
+        data = parser.new(client.events).normalized_events.first
 
         new_event = fetcher.save(data)
         new_title = GoodreadsEvent.where(:uuid => '1234').first.title
@@ -43,6 +44,12 @@ RSpec.describe Fetchers::EventsFetcher do
         expect(GoodreadsEvent.count).to eq 1
 
       end
+    end
+  end
+
+  describe '#events' do
+    it 'delegates to @client.events' do
+      expect(fetcher.events).to eq parser.new(client.events).normalized_events
     end
   end
 

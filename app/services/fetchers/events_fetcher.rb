@@ -14,11 +14,10 @@ module Fetchers
     end
 
     def events
-      @client.events
+      @parser.new(@client.events).normalized_events
     end
 
     def save(event_data)
-
       new_event = @event_class.where(:uuid => event_data.uuid).first_or_initialize
 
       new_event.bulk_set do |e|
@@ -28,7 +27,7 @@ module Fetchers
         e.image_url = event_data.image_url
       end
 
-      new_event.save
+      new_event.save!
       new_event
     end
 

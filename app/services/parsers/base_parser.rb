@@ -10,7 +10,7 @@ module Parsers
       @data = data
     end
 
-    def events
+    def normalized_events
       @data.map do |raw_event|
         fields_from(raw_event)
       end

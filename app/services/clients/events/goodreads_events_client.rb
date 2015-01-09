@@ -2,8 +2,8 @@ module Clients
   module Events
     class GoodreadsEventsClient
 
-      def events
-        @events ||= Goodreads::Client.new.shelf(3734291, 'currently-reading')[:books]
+      def self.events
+        Goodreads::Client.new.shelf(3734291, 'currently-reading')[:books]
       end
 
     end

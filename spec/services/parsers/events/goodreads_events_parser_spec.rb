@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Parsers::Events::GoodreadsEventsParser do
-  describe '#events' do
+  describe '#normalized_events' do
     it 'returns normalized fields' do
       data = [
         {
@@ -16,7 +16,7 @@ RSpec.describe Parsers::Events::GoodreadsEventsParser do
         },
       ]
 
-      output = Parsers::Events::GoodreadsEventsParser.new(data).events.first
+      output = Parsers::Events::GoodreadsEventsParser.new(data).normalized_events.first
 
       event1 = data[0]
 
