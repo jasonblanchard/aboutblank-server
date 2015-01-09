@@ -1,27 +1,15 @@
 module Fetchers
-  class BaseFetcher
+  class EventsFetcher
 
-    def initialize
-      setup_client
-      setup_parser
-      setup_event_class
-    end
-
-    def setup_event_class(klass=nil)
-      raise NotImplemented.new
-    end
-
-    def setup_parser(parser=nil)
-      raise NotImplemented.new
-    end
-
-    def setup_client(client=nil)
-      raise NotImplemented.new
+    def initialize(client, parser, event_class)
+      @client = client
+      @parser = parser
+      @event_class = event_class
     end
 
     def fetch_and_save!
-      events.each do |event|
-        save event
+      events.each do |event_data|
+        save event_data
       end
     end
 
@@ -29,9 +17,8 @@ module Fetchers
       @client.events
     end
 
-    def save(event)
+    def save(event_data)
 
-      event_data = @parser.new(event).fields
       new_event = @event_class.where(:uuid => event_data.uuid).first_or_initialize
 
       new_event.bulk_set do |e|

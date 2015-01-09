@@ -1,21 +1,30 @@
 require 'rails_helper'
 
 RSpec.describe Parsers::Events::GoodreadsEventsParser do
-  describe '#fields' do
+  describe '#events' do
     it 'returns normalized fields' do
-      data = {
-        :book => {:title => 'testing', :link => "http://example.com", :small_image_url => "http://example.com/image"},
-        :started_at => Time.now.to_date,
-        :id => '1234'
-      }
+      data = [
+        {
+          :book => {:title => 'testing', :link => "http://example.com", :small_image_url => "http://example.com/image"},
+          :started_at => Time.now.to_date,
+          :id => '1234'
+        },
+        {
+          :book => {:title => 'testing2', :link => "http://example.com/2", :small_image_url => "http://example.com/image/2"},
+          :started_at => Time.now.to_date,
+          :id => '5678'
+        },
+      ]
 
-      output = Parsers::Events::GoodreadsEventsParser.new(data).fields
+      output = Parsers::Events::GoodreadsEventsParser.new(data).events.first
 
-      expect(output.uuid).to eq data[:id]
-      expect(output.title).to eq data[:book][:title]
-      expect(output.happened_at).to eq data[:started_at]
-      expect(output.url).to eq data[:book][:link]
-      expect(output.image_url).to eq data[:book][:small_image_url]
+      event1 = data[0]
+
+      expect(output.uuid).to eq event1[:id]
+      expect(output.title).to eq event1[:book][:title]
+      expect(output.happened_at).to eq event1[:started_at]
+      expect(output.url).to eq event1[:book][:link]
+      expect(output.image_url).to eq event1[:book][:small_image_url]
     end
   end
 end

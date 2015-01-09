@@ -2,14 +2,16 @@ module Parsers
   module Events
     class GoodreadsEventsParser < Parsers::BaseParser
 
-      def fields
-        @uuid = @data[:id]
-        @title = @data[:book][:title]
-        @happened_at = @data[:started_at]
-        @url = @data[:book][:link]
-        @image_url = @data[:book][:small_image_url]
+      def fields_from(raw_event)
+        event = NormalizedEvent.new
 
-        self
+        event.uuid = raw_event[:id]
+        event.title = raw_event[:book][:title]
+        event.happened_at = raw_event[:started_at]
+        event.url = raw_event[:book][:link]
+        event.image_url = raw_event[:book][:small_image_url]
+        
+        event
       end
 
     end
