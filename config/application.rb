@@ -23,6 +23,10 @@ module AboutblankServer
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
 
+    config.generators.helper = false
+    config.generators.stylesheets = false
+    config.generators.javascripts = false
+
     config.autoload_paths += %W(#{config.root}/app)
 
     config.middleware.insert_before 0, "Rack::Cors", :debug => true, :logger => (-> { Rails.logger }) do
