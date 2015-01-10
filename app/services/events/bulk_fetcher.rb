@@ -1,11 +1,15 @@
 module Events
   class BulkFetcher
-    
-    BUNDLES = [
-      OpenStruct.new(:parser => Events::Parsers::Goodreads.new(Events::Clients::Goodreads.new), :event_class => GoodreadsEvent),
-      OpenStruct.new(:parser => Events::Parsers::Delicious.new(Events::Clients::Delicious.new), :event_class => DeliciousEvent)
-    ]
 
+    SERVICES = ["Goodreads", "Delicious"]
+
+    BUNDLES = SERVICES.map do |service|
+      client = "Events::Clients::#{service}".constantize.new
+      parser = "Events::Parsers::#{service}".constantize.new(client)
+      event_class = "#{service}Event".constantize
+      OpenStruct.new(:parser => parser, :event_class => event_class)
+    end
+    
     def self.fetch_and_save_all!
       BUNDLES.each do |bundle|
         Events::Fetcher.new(bundle.parser, bundle.event_class).fetch_and_save!
