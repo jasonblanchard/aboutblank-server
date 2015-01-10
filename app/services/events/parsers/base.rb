@@ -8,11 +8,14 @@ module Events
 
       def initialize(client)
         @client = client
-        @data = @client.events
+      end
+
+      def data
+        @client.events
       end
 
       def normalized_events
-        @data.map do |raw_event|
+        data.map do |raw_event|
           fields_from(raw_event)
         end
       end
