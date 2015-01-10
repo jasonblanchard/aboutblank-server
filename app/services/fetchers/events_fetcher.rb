@@ -14,7 +14,7 @@ module Fetchers
     end
 
     def events
-      @parser.new(@client.events).normalized_events
+      @parser.normalized_events
     end
 
     def save(event_data)

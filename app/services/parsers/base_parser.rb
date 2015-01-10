@@ -1,13 +1,13 @@
 module Parsers
   class BaseParser
 
-    class BaseParser::NormalizedEvent
+    class NormalizedEvent
       attr_accessor :uuid, :title, :happened_at, :url, :image_url
-
     end
 
-    def initialize(data)
-      @data = data
+    def initialize(client)
+      @client = client
+      @data = @client.events
     end
 
     def normalized_events

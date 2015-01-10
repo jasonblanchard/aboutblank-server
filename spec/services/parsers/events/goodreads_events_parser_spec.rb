@@ -1,22 +1,29 @@
 require 'rails_helper'
 
 RSpec.describe Parsers::Events::GoodreadsEventsParser do
+
+  let(:client) { Clients::Events::GoodreadsEventsClient }
+  let(:data) {[
+    {
+      :book => {:title => 'testing', :link => "http://example.com", :small_image_url => "http://example.com/image"},
+      :started_at => Time.now.to_date,
+      :id => '1234'
+    },
+    {
+      :book => {:title => 'testing2', :link => "http://example.com/2", :small_image_url => "http://example.com/image/2"},
+      :started_at => Time.now.to_date,
+      :id => '5678'
+    },
+  ]
+  }
+
+  before do
+    allow_any_instance_of(client).to receive(:events).and_return(data)
+  end
+
   describe '#normalized_events' do
     it 'returns normalized fields' do
-      data = [
-        {
-          :book => {:title => 'testing', :link => "http://example.com", :small_image_url => "http://example.com/image"},
-          :started_at => Time.now.to_date,
-          :id => '1234'
-        },
-        {
-          :book => {:title => 'testing2', :link => "http://example.com/2", :small_image_url => "http://example.com/image/2"},
-          :started_at => Time.now.to_date,
-          :id => '5678'
-        },
-      ]
-
-      output = Parsers::Events::GoodreadsEventsParser.new(data).normalized_events.first
+      output = Parsers::Events::GoodreadsEventsParser.new(client.new).normalized_events.first
 
       event1 = data[0]
 
