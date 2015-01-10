@@ -1,6 +1,6 @@
-module Parsers
-  module Events
-    class GoodreadsEventsParser < Parsers::BaseParser
+module Events
+  module Parsers
+    class Goodreads < Events::Parsers::Base
 
       def fields_from(raw_event)
         event = NormalizedEvent.new

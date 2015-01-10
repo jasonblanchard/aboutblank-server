@@ -1,15 +1,15 @@
 require 'rails_helper'
 
-RSpec.describe Fetchers::EventsFetcher do
+RSpec.describe Events::Fetcher do
   
-  let(:client) { Clients::Events::GoodreadsEventsClient.new }
-  let(:parser) { Parsers::Events::GoodreadsEventsParser.new(client) }
-  let(:fetcher) { Fetchers::EventsFetcher.new(client, parser, GoodreadsEvent) }
+  let(:client) { Events::Clients::Goodreads.new }
+  let(:parser) { Events::Parsers::Goodreads.new(client) }
+  let(:fetcher) { Events::Fetcher.new(client, parser, GoodreadsEvent) }
 
   before do
     allow_any_instance_of(parser.class).to receive(:normalized_events).and_return([
-      instance_double(Parsers::BaseParser::NormalizedEvent, :uuid => '1234', :title => 'testing', :happened_at => Time.now.to_date, :url => "http://example.com", :image_url => "http://example.com/image"),
-      instance_double(Parsers::BaseParser::NormalizedEvent, :uuid => '4567', :title => 'testing2', :happened_at => Time.now.to_date, :url => "http://example.com/2", :image_url => "http://example.com/image/2"),
+      instance_double(Events::Parsers::Base::NormalizedEvent, :uuid => '1234', :title => 'testing', :happened_at => Time.now.to_date, :url => "http://example.com", :image_url => "http://example.com/image"),
+      instance_double(Events::Parsers::Base::NormalizedEvent, :uuid => '4567', :title => 'testing2', :happened_at => Time.now.to_date, :url => "http://example.com/2", :image_url => "http://example.com/image/2"),
     ])
   end
 
