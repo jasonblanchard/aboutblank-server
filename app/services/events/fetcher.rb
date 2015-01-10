@@ -1,8 +1,7 @@
 module Events
   class Fetcher
 
-    def initialize(client, parser, event_class)
-      @client = client
+    def initialize(parser, event_class)
       @parser = parser
       @event_class = event_class
     end

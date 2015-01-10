@@ -4,7 +4,7 @@ RSpec.describe Events::Fetcher do
   
   let(:client) { Events::Clients::Goodreads.new }
   let(:parser) { Events::Parsers::Goodreads.new(client) }
-  let(:fetcher) { Events::Fetcher.new(client, parser, GoodreadsEvent) }
+  let(:fetcher) { Events::Fetcher.new(parser, GoodreadsEvent) }
 
   before do
     allow_any_instance_of(parser.class).to receive(:normalized_events).and_return([
@@ -47,7 +47,7 @@ RSpec.describe Events::Fetcher do
   end
 
   describe '#events' do
-    it 'delegates to @client.events' do
+    it 'delegates to @parser.events' do
       expect(fetcher.events).to eq parser.normalized_events
     end
   end
