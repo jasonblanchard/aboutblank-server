@@ -4,6 +4,7 @@ Rails.application.routes.draw do
     namespace :v2 do
       resources :goodreads_events, :only => [:index]
       resources :delicious_events, :only => [:index]
+      resources :feeds, :only => [:index]
     end
   end
   
