@@ -1,7 +1,7 @@
 module Events
   class BulkFetcher
 
-    SERVICES = ["Goodreads", "Delicious"]
+    SERVICES = ["Goodreads", "Delicious", "GithubProject"]
 
     BUNDLES = SERVICES.map do |service|
       client = "Events::Clients::#{service}".constantize.new

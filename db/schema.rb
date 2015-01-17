@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150108125053) do
+ActiveRecord::Schema.define(version: 20150117160143) do
 
   create_table "delicious_events", force: :cascade do |t|
     t.string   "title"
@@ -24,6 +24,18 @@ ActiveRecord::Schema.define(version: 20150108125053) do
   end
 
   add_index "delicious_events", ["uuid"], name: "index_delicious_events_on_uuid"
+
+  create_table "github_project_events", force: :cascade do |t|
+    t.string   "uuid"
+    t.string   "title"
+    t.date     "happened_at"
+    t.string   "url"
+    t.string   "image_url"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "github_project_events", ["uuid"], name: "index_github_project_events_on_uuid"
 
   create_table "goodreads_events", force: :cascade do |t|
     t.string   "uuid"

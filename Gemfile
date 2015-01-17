@@ -62,3 +62,4 @@ gem 'rack-cors', '0.3.0'
 
 gem 'rails_12factor', group: :production
 gem 'httparty'
+gem "octokit", "~> 3.0"
