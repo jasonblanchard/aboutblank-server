@@ -8,7 +8,7 @@ module Events
         event.uuid = raw_event.id
         event.title = raw_event.full_name
         event.happened_at = raw_event.created_at
-        event.url = raw_event.url
+        event.url = raw_event.html_url
 
         event
       end
