@@ -2,8 +2,6 @@ Rails.application.routes.draw do
 
   namespace :api, :defaults => { :format => :json } do
     namespace :v2 do
-      resources :goodreads_events, :only => [:index]
-      resources :delicious_events, :only => [:index]
       resources :feeds, :only => [:index]
     end
   end
