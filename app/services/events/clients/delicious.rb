@@ -3,7 +3,7 @@ module Events
     class Delicious
 
       def events
-        r = HTTParty.get('http://feeds.delicious.com/v2/json/jas.blanchard')
+        r = HTTParty.get('http://feeds.del.icio.us/v2/json/jas.blanchard')
         events = r.parsed_response
 
         if r.code == 200
